@@ -1,71 +1,88 @@
 #include <stdio.h>
+#include <stdlib.h>
 #define Maxsize 5
 
 void insert();
 void delete();
 void display();
-
 int queue[Maxsize];
 int front = -1;
 int rear = -1;
 
-int main() {
+int main(){
+    
     insert();
     insert();
     insert();
     insert();
     insert();
-    insert(); // This should show overflow
+    insert();
+    insert();
     display();
-
     delete();
     delete();
     display();
-
     delete();
     delete();
     delete();
-    delete(); // This should show underflow
+    delete();
 
     return 0;
+
 }
 
-void insert() {
+void insert(){
+
     int data;
-    if (rear == Maxsize - 1) {
-        printf("\nQueue overflow");
-    } else {
-        printf("\nEnter a value to insert: ");
-        scanf("%d", &data);
-        if (front == -1) { // first insertion
-            front = 0;
+    if(rear==Maxsize-1){
+        printf("\n overflow");
+    }else{
+        if(rear==1){
+            front=0;
+            rear=0;
+        }else{
+    
+            rear++;
+    
         }
-        rear++;
-        queue[rear] = data;
+        printf("\n enter a value for insert");
+        scanf("%d",&data);
+        queue[rear]=data;
+
     }
+
+
+
 }
 
-void delete() {
-    if (front == -1 || front > rear) {
-        printf("\nQueue underflow");
-    } else {
-        printf("\nDeleted element: %d", queue[front]);
-        front++;
-        if (front > rear) { // Reset if queue is empty
-            front = -1;
-            rear = -1;
+
+void delete(){
+
+    if(front==-1){
+        printf("\n queue underflow");
+    }else{
+        if(front==rear){
+            queue[front]="\0";
+            front=-1;
+            rear=-1;
+        }else{
+            queue[front]="\0";
+            front++;
+    
         }
     }
+
 }
 
-void display() {
-    if (front == -1) {
-        printf("\nQueue is empty");
-        return;
-    }
 
-    printf("\nElements of queue are: ");
-    for (int i = front; i <= rear; i++) {
-        printf("%d ", queue[i]);
+void display(){
+
+    int i;
+    printf("\n elements of queue are");
+    for ( i = front; i <= rear; i++)
+    {
+        printf("%d",queue[i]);
     }
+    
+
 }
